@@ -19,7 +19,7 @@ public class Main_Window extends JFrame {
 				try {
 					Main_Window frame = new Main_Window();
 					frame.setVisible(true);
-					Timer t  = new Timer(3606, Command.SHUTDOWN);
+					Timer t  = new Timer(15, Command.ALARM);
 					t.setVisible(true);
 					new Thread(t).start();
 				} catch (Exception e) {
