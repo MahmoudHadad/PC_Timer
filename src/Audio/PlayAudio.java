@@ -1,3 +1,4 @@
+package Audio;
 import java.io.File;
 
 import javax.sound.sampled.AudioFormat;
@@ -12,6 +13,7 @@ public class PlayAudio {
    	 try {
    		 
 	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+	        
 	        Clip clip = AudioSystem.getClip();
 	        clip.open(audioInputStream);
 	        AudioFormat format = audioInputStream.getFormat();

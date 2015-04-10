@@ -8,6 +8,10 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JButton;
 
+import Audio.PlaySong;
+import Commands.Command;
+
+
 import com.sun.javafx.binding.StringFormatter;
 import com.sun.prism.Mesh;
 
@@ -74,19 +78,7 @@ public class Timer extends JFrame implements Runnable{
 
 	public void run() {
 		
-		if (command == Command.SHUTDOWN)
-			messageLabel.setText("SHUTDOWN IN");
-		else if(command == Command.RESTART)
-			messageLabel.setText("RESTART IN");
-		else if(command == Command.LOGOFF)
-			messageLabel.setText("LOGOFF IN");
-		else if(command == Command.SLEEP)
-			messageLabel.setText("SLEEP IN");
-		else if(command == Command.HIBERNATE)
-			messageLabel.setText("HIBERNATE IN");
-		else if(command == Command.ALARM)
-			messageLabel.setText("ALARM IN");
-		
+		messageLabel.setText(command.getMessage());
 		
 		int h,m,s;
 		
@@ -106,29 +98,8 @@ public class Timer extends JFrame implements Runnable{
 				e.printStackTrace();
 			}
 		}
-		String com = "";
-		if(command == Command.ALARM)
-		{
-			new PlaySong(getClass().getResource("Loud_Alarm.wav"),21).start();
-		}
-		else
-		{
-			if (command == Command.SHUTDOWN)
-				com = "shutdown -s -t 0";
-			else if(command == Command.RESTART)
-				com = "shutdown -r -t 0";
-			else if(command == Command.LOGOFF)
-				com = "shutdown/l";
-			else if(command == Command.SLEEP)
-				com = "";
-			else if(command == Command.HIBERNATE)
-				com = "shutdown -h";
-			try {
-				Process process = Runtime.getRuntime().exec (com);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
+		command.execute();
+
 	}
 }

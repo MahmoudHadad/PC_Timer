@@ -1,12 +1,14 @@
+package Audio;
+import java.io.File;
 import java.net.URL;
 
-class PlaySong extends Thread 
+public class PlaySong extends Thread 
 {
 	URL file ;
 	int durationToWait;
-	public PlaySong(URL f, int durationToWait) {
+	public PlaySong(URL url, int durationToWait) {
 		// TODO Auto-generated constructor stub
-		file = f;
+		file = url;
 		this.durationToWait = durationToWait;
 	}
 	public void run()

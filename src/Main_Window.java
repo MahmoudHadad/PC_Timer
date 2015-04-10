@@ -15,7 +15,15 @@ import javax.swing.SpinnerModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import sun.management.jdp.JdpGenericPacket;
+import Commands.Alarm;
+import Commands.Command;
+
+import Commands.Hibernate;
+import Commands.Logout;
+import Commands.Restart;
+import Commands.Shutdown;
+
+
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -118,16 +126,21 @@ public class Main_Window extends JFrame {
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int time =(Integer)hoursSpinner.getValue() * 3600 + (Integer)minutsSpinner.getValue() * 60 + (Integer)secondsSpinner.getValue() ;
-				Command c = Command.SHUTDOWN;
+			 Command c = null ;
+			 	if(shutdownRB.isSelected() == true)
+			 		c = new Shutdown("Shutdown In");
+			 	
+			 	else if(restartRB.isSelected() == true)
+					c = new Restart("Restart In");
 				
-				if(restartRB.isSelected() == true)
-					c = Command.RESTART;
-				else if(alarmRB.isSelected()== true)
-					c = Command.ALARM;
+			 	else if(alarmRB.isSelected()== true)
+					c = new Alarm("Alarm In");
+			
 				else if(hibernateRB.isSelected()== true)
-					c = Command.HIBERNATE;
+					c = new Hibernate("Hibernate In");
+			 
 				else if(logoffRB.isSelected()== true)
-					c = Command.LOGOFF;
+					c = new Logout ("Logout In");
 				
 				Timer t  = new Timer(time, c);
 				t.setVisible(true);
